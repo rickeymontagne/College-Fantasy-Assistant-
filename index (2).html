@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>College Fantasy Assistant</title>
+<style>
+:root{--bg:#0d1117;--card:#151b24;--line:#293241;--text:#f4f7fb;--muted:#aab4c2;--accent:#8b5cf6}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(145deg,#0b0f16,#171324);color:var(--text)}
+.wrap{max-width:1050px;margin:auto;padding:70px 24px}.hero{text-align:center;padding:45px 0 60px}
+.logo{display:inline-flex;width:62px;height:62px;border-radius:18px;align-items:center;justify-content:center;background:var(--accent);font-size:30px;font-weight:800}
+h1{font-size:clamp(40px,7vw,72px);line-height:1;margin:20px 0 14px}
+.lead{font-size:20px;line-height:1.55;color:var(--muted);max-width:750px;margin:auto}
+.badge{display:inline-block;border:1px solid #6f5aa8;background:#201936;color:#cdbfff;border-radius:999px;padding:7px 12px;font-size:13px;margin-top:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:rgba(21,27,36,.9);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h2{margin-top:0}.card p{color:var(--muted);line-height:1.6}
+.icon{font-size:25px}.footer{border-top:1px solid var(--line);margin-top:55px;padding-top:22px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+<div class="logo">CF</div>
+<h1>College Fantasy Assistant</h1>
+<p class="lead">A personal college fantasy football analysis tool built to make Yahoo NCAA fantasy easier to manage.</p>
+<div class="badge">Initial deployment · Personal use · Read-only Yahoo integration</div>
+</section>
+
+<section class="grid">
+<div class="card"><div class="icon">🏆</div><h2>Lineup Optimization</h2><p>Compare your roster using league-specific scoring, projected production, position eligibility and matchup context.</p></div>
+<div class="card"><div class="icon">📊</div><h2>Independent Analysis</h2><p>Combine multiple projection and ranking sources instead of relying on a single fantasy ranking.</p></div>
+<div class="card"><div class="icon">🎯</div><h2>Start / Sit</h2><p>Turn the numbers into straightforward recommendations for your weekly lineup.</p></div>
+<div class="card"><div class="icon">🔄</div><h2>Waiver Assistant</h2><p>Evaluate available players against your roster needs, projected value and replacement value.</p></div>
+</section>
+
+<section class="card" style="margin-top:16px">
+<h2>Yahoo Fantasy Sports API</h2>
+<p>College Fantasy Assistant uses Yahoo Fantasy Sports API data to retrieve league settings, roster, matchup, player and available-player information. The initial application is designed for a single Yahoo NCAA college fantasy football league and operates in read-only mode. It does not automatically modify Yahoo rosters or submit transactions.</p>
+</section>
+
+<div class="footer">College Fantasy Assistant · Personal-use project · Yahoo Fantasy data is provided through the Yahoo Fantasy Sports API.</div>
+</div>
+</body>
+</html>
