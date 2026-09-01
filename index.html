@@ -3,43 +3,174 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>College Fantasy Assistant</title>
+<title>College Fantasy Assistant V9</title>
 <style>
-:root{--bg:#0d1117;--card:#151b24;--line:#293241;--text:#f4f7fb;--muted:#aab4c2;--accent:#8b5cf6}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(145deg,#0b0f16,#171324);color:var(--text)}
-.wrap{max-width:1050px;margin:auto;padding:70px 24px}.hero{text-align:center;padding:45px 0 60px}
-.logo{display:inline-flex;width:62px;height:62px;border-radius:18px;align-items:center;justify-content:center;background:var(--accent);font-size:30px;font-weight:800}
-h1{font-size:clamp(40px,7vw,72px);line-height:1;margin:20px 0 14px}
-.lead{font-size:20px;line-height:1.55;color:var(--muted);max-width:750px;margin:auto}
-.badge{display:inline-block;border:1px solid #6f5aa8;background:#201936;color:#cdbfff;border-radius:999px;padding:7px 12px;font-size:13px;margin-top:22px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.card{background:rgba(21,27,36,.9);border:1px solid var(--line);border-radius:18px;padding:24px}
-.card h2{margin-top:0}.card p{color:var(--muted);line-height:1.6}
-.icon{font-size:25px}.footer{border-top:1px solid var(--line);margin-top:55px;padding-top:22px;color:var(--muted);font-size:13px;text-align:center}
+:root{--bg:#f4f6f9;--card:#fff;--ink:#17202a;--muted:#687386;--line:#e2e6ec;--purple:#6d43c7;--green:#1b8a52;--red:#c43b3b;--gold:#a16b00}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#111827;color:#fff;padding:18px 26px;position:sticky;top:0;z-index:5}.head{max-width:1220px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:12px;background:#7c4dcb;display:grid;place-items:center;font-weight:900}.brand b{font-size:18px}.brand span{font-size:12px;color:#b9c2d0;display:block}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav button{background:transparent;color:#cbd5e1;border:0;padding:9px 12px;border-radius:8px;font-weight:700;cursor:pointer}nav button.active,nav button:hover{background:#272f3d;color:#fff}
+.wrap{max-width:1220px;margin:24px auto;padding:0 18px}.page{display:none}.page.active{display:block}
+.topline{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:18px}.topline h1{margin:0 0 5px;font-size:28px}.muted{color:var(--muted)}.small{font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px #00000008}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.metric{border:1px solid var(--line);border-radius:12px;padding:14px}.metric .label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase}.metric b{font-size:25px;display:block;margin-top:5px}.metric.good b{color:var(--green)}
+.match{display:flex;justify-content:space-between;align-items:center;gap:20px}.score{font-size:36px;font-weight:900}.vs{color:#98a1ae;font-weight:800}
+.progress{height:9px;background:#e8ebef;border-radius:20px;overflow:hidden}.bar{height:100%;background:var(--purple);width:68%}
+h2{margin:0 0 14px;font-size:19px}h3{margin:0 0 7px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 9px;border-bottom:1px solid var(--line);font-size:14px}th{font-size:11px;color:var(--muted);text-transform:uppercase}tr:last-child td{border-bottom:0}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.start{background:#e7f7ee;color:#187344}.bench{background:#eef1f5;color:#5e6878}.add{background:#e8f0ff;color:#2d5eb2}.drop{background:#fdecec;color:#a32d2d}.watch{background:#fff5dc;color:#8b5c00}
+.alert{padding:12px;border-left:4px solid var(--purple);background:#f6f2ff;border-radius:8px;margin:8px 0}.success{border-left-color:var(--green);background:#eef9f3}.danger{border-left-color:var(--red);background:#fff1f1}
+.player{font-weight:800}.pos{font-size:11px;color:var(--muted);font-weight:800}.why{font-size:12px;color:var(--muted);margin-top:3px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.controls button,.select{border:1px solid #ccd3dc;background:#fff;border-radius:8px;padding:9px 11px;font-weight:700;cursor:pointer}.controls button.active{background:#171e29;color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.search{width:100%;padding:11px;border:1px solid #ccd3dc;border-radius:8px;font-size:14px;margin-bottom:10px}
+.note{font-size:12px;color:var(--muted);padding:10px 12px;background:#f5f6f8;border-radius:8px;margin-top:10px}
+footer{max-width:1220px;margin:35px auto 50px;padding:0 18px;color:#8a93a1;font-size:12px}
+@media(max-width:850px){.grid,.grid3,.two{grid-template-columns:1fr 1fr}.head{align-items:flex-start;flex-direction:column}.match{align-items:flex-start;flex-direction:column}.score{font-size:30px}}
+@media(max-width:560px){.grid,.grid3,.two{grid-template-columns:1fr}header{position:static}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<section class="hero">
-<div class="logo">CF</div>
-<h1>College Fantasy Assistant</h1>
-<p class="lead">A personal college fantasy football analysis tool built to make Yahoo NCAA fantasy easier to manage.</p>
-<div class="badge">Initial deployment · Personal use · Read-only Yahoo integration</div>
-</section>
-
-<section class="grid">
-<div class="card"><div class="icon">🏆</div><h2>Lineup Optimization</h2><p>Compare your roster using league-specific scoring, projected production, position eligibility and matchup context.</p></div>
-<div class="card"><div class="icon">📊</div><h2>Independent Analysis</h2><p>Combine multiple projection and ranking sources instead of relying on a single fantasy ranking.</p></div>
-<div class="card"><div class="icon">🎯</div><h2>Start / Sit</h2><p>Turn the numbers into straightforward recommendations for your weekly lineup.</p></div>
-<div class="card"><div class="icon">🔄</div><h2>Waiver Assistant</h2><p>Evaluate available players against your roster needs, projected value and replacement value.</p></div>
-</section>
-
-<section class="card" style="margin-top:16px">
-<h2>Yahoo Fantasy Sports API</h2>
-<p>College Fantasy Assistant uses Yahoo Fantasy Sports API data to retrieve league settings, roster, matchup, player and available-player information. The initial application is designed for a single Yahoo NCAA college fantasy football league and operates in read-only mode. It does not automatically modify Yahoo rosters or submit transactions.</p>
-</section>
-
-<div class="footer">College Fantasy Assistant · Personal-use project · Yahoo Fantasy data is provided through the Yahoo Fantasy Sports API.</div>
+<header>
+<div class="head">
+<div class="brand"><div class="logo">CF</div><div><b>College Fantasy Assistant</b><span>Yahoo NCAA CFB · League #16538</span></div></div>
+<nav>
+<button class="active" data-page="dashboard">Dashboard</button>
+<button data-page="team">My Team</button>
+<button data-page="waivers">Waivers</button>
+<button data-page="rankings">Rankings</button>
+<button data-page="matchup">Matchup</button>
+</nav>
 </div>
+</header>
+
+<main class="wrap">
+
+<section id="dashboard" class="page active">
+<div class="topline"><div><h1>Week 1 Game Plan</h1><div class="muted">Your first matchup · projections shown from your Yahoo matchup snapshot</div></div><span class="badge watch">Yahoo API: Pending approval</span></div>
+<div class="grid">
+<div class="metric"><div class="label">Your Projection</div><b>206.09</b></div>
+<div class="metric"><div class="label">Opponent</div><b>193.18</b></div>
+<div class="metric good"><div class="label">Projected Edge</div><b>+12.91</b></div>
+<div class="metric"><div class="label">Win Probability</div><b>68%</b></div>
+</div>
+
+<div class="card">
+<h2>Matchup outlook</h2>
+<div class="match"><div><div class="muted small">Ricky's Team</div><div class="score">206.09</div></div><div class="vs">VS</div><div><div class="muted small">Opponent</div><div class="score">193.18</div></div></div>
+<div style="margin-top:15px"><div class="muted small">Estimated win probability</div><div class="progress" style="margin-top:6px"><div class="bar"></div></div><div style="display:flex;justify-content:space-between;margin-top:5px;font-size:12px"><span>Ricky 68%</span><span>Opponent 32%</span></div></div>
+</div>
+
+<div class="two">
+<div class="card"><h2>🧠 Biggest lineup calls</h2>
+<div class="alert success"><b>Start Devon Dampier</b><br><span class="muted">50.34 projected · highest QB projection on your roster.</span></div>
+<div class="alert success"><b>Start Reed Harris in FLEX</b><br><span class="muted">14.53 projected and useful WR/FLEX flexibility.</span></div>
+<div class="alert"><b>Watch Wayne Knight</b><br><span class="muted">13.86 projected; his value is close enough to merit matchup review.</span></div>
+</div>
+<div class="card"><h2>🔎 What I'm looking for</h2>
+<div class="alert"><b>RB depth</b><br><span class="muted">Your strongest RBs are Bishop and Sheppard. A useful RB waiver add would improve flexibility.</span></div>
+<div class="alert"><b>WR/FLEX depth</b><br><span class="muted">You have several playable WR/FLEX options, but another high-upside add could change the weekly lineup.</span></div>
+<div class="alert"><b>Independent rankings</b><br><span class="muted">Yahoo projections are the starting point—not the final answer.</span></div>
+</div>
+</div>
+</section>
+
+<section id="team" class="page">
+<div class="topline"><div><h1>My Team</h1><div class="muted">Week 1 optimized lineup based on the roster snapshot</div></div></div>
+<div class="card">
+<h2>Optimal lineup</h2>
+<table><thead><tr><th>Slot</th><th>Player</th><th>Pos</th><th>Proj</th><th>Recommendation</th><th>Why</th></tr></thead><tbody id="lineup"></tbody></table>
+</div>
+<div class="card">
+<h2>Bench</h2>
+<table><thead><tr><th>Player</th><th>Pos</th><th>Proj</th><th>Status</th></tr></thead><tbody id="bench"></tbody></table>
+</div>
+</section>
+
+<section id="waivers" class="page">
+<div class="topline"><div><h1>Waiver Assistant</h1><div class="muted">This is the analysis framework. Live availability will populate after Yahoo API approval.</div></div><span class="badge watch">DATA FEED PENDING</span></div>
+<div class="card">
+<h2>Team needs</h2>
+<div class="grid">
+<div class="metric"><div class="label">Priority 1</div><b>RB</b><span class="muted">Depth + FLEX options</span></div>
+<div class="metric"><div class="label">Priority 2</div><b>WR</b><span class="muted">Upside + weekly options</span></div>
+<div class="metric"><div class="label">Priority 3</div><b>TE</b><span class="muted">Depth</span></div>
+<div class="metric"><div class="label">Priority 4</div><b>QB</b><span class="muted">Insurance only</span></div>
+</div>
+</div>
+<div class="card">
+<h2>How waiver scoring will work</h2>
+<table><thead><tr><th>Factor</th><th>Weight</th><th>What it means</th></tr></thead><tbody>
+<tr><td>League-adjusted projection</td><td>35%</td><td>Projection converted to your exact scoring</td></tr>
+<tr><td>Roster need</td><td>20%</td><td>How much the player improves your actual roster</td></tr>
+<tr><td>Expected workload</td><td>15%</td><td>Touches, routes, targets, snaps and role</td></tr>
+<tr><td>Schedule / matchup</td><td>10%</td><td>Upcoming fantasy environment</td></tr>
+<tr><td>Independent consensus</td><td>10%</td><td>Multiple external rankings/projections</td></tr>
+<tr><td>Injury/depth-chart upside</td><td>10%</td><td>Opportunity that could change quickly</td></tr>
+</tbody></table>
+<div class="note">When Yahoo access is approved, this page will replace the placeholder with the complete available-player pool and actual ADD/DROP recommendations.</div>
+</div>
+</section>
+
+<section id="rankings" class="page">
+<div class="topline"><div><h1>Player Rankings</h1><div class="muted">League-specific rankings—not generic Yahoo ranks</div></div></div>
+<div class="card">
+<div class="controls">
+<button class="active rankfilter" data-pos="ALL">All</button><button class="rankfilter" data-pos="QB">QB</button><button class="rankfilter" data-pos="RB">RB</button><button class="rankfilter" data-pos="WR">WR</button><button class="rankfilter" data-pos="TE">TE</button>
+</div>
+<table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Projection</th><th>Roster</th><th>Model note</th></tr></thead><tbody id="rankingsBody"></tbody></table>
+</div>
+</section>
+
+<section id="matchup" class="page">
+<div class="topline"><div><h1>Matchup Analyzer</h1><div class="muted">Position-by-position view of your Week 1 matchup</div></div></div>
+<div class="card">
+<table><thead><tr><th>Position</th><th>Your projection</th><th>Opponent projection</th><th>Edge</th><th>Read</th></tr></thead><tbody>
+<tr><td><b>QB</b></td><td>50.34</td><td>48.26</td><td>+2.08</td><td><span class="badge start">YOUR EDGE</span></td></tr>
+<tr><td><b>RB</b></td><td>39.42</td><td>36.08</td><td>+3.34</td><td><span class="badge start">YOUR EDGE</span></td></tr>
+<tr><td><b>WR</b></td><td>44.13</td><td>39.38</td><td>+4.75</td><td><span class="badge start">YOUR EDGE</span></td></tr>
+<tr><td><b>TE</b></td><td>11.62</td><td>6.21</td><td>+5.41</td><td><span class="badge start">YOUR EDGE</span></td></tr>
+<tr><td><b>FLEX</b></td><td>27.38</td><td>28.01</td><td>-0.63</td><td><span class="badge watch">CLOSE</span></td></tr>
+<tr><td><b>DEF</b></td><td>33.84</td><td>34.18</td><td>-0.34</td><td><span class="badge watch">CLOSE</span></td></tr>
+</tbody></table>
+</div>
+<div class="two">
+<div class="card"><h2>🔥 Where you win</h2><p><b>TE and WR.</b> Your roster has a meaningful projected advantage at those spots.</p></div>
+<div class="card"><h2>⚠️ Where it can swing</h2><p><b>FLEX and DEF.</b> Those are close enough that a matchup/injury update could change the recommendation.</p></div>
+</div>
+</section>
+
+</main>
+<footer>College Fantasy Assistant V9 · Prototype data from your Yahoo matchup screenshots. Live Yahoo data will replace the snapshot after API access is approved.</footer>
+
+<script>
+const roster=[
+["Devon Dampier","QB",50.34],["Bryn Brown","QB",48.37],["DeSean Bishop","RB",21.26],["Nate Sheppard","RB",18.16],
+["Wayne Knight","RB",13.86],["Dillin Jones","RB",11.38],["Cam Coleman","WR",15.92],["Cooper Barkate","WR",13.62],
+["Ian Strong","WR",13.58],["Reed Harris","WR",14.53],["Raick Brown","WR",12.57],["Justin Bowick","WR",11.80],
+["Winston Watkins Jr.","WR",9.59],["Garrett Oakley","TE",11.62],["Dylan Wade","TE",11.08],["Chase Hendricks","WR",14.68]
+];
+const lineup=[["QB","Devon Dampier",50.34,"START","Highest QB projection"],
+["RB","DeSean Bishop",21.26,"START","Best RB projection"],
+["RB","Nate Sheppard",18.16,"START","Second-best RB projection"],
+["WR","Cam Coleman",15.92,"START","Best WR projection"],
+["WR","Chase Hendricks",14.68,"START","Next-best WR"],
+["WR","Reed Harris",14.53,"START","Useful FLEX/WR value"],
+["TE","Garrett Oakley",11.62,"START","Best TE projection"],
+["FLEX","Dierre Hill Jr.",13.76,"START","Best remaining FLEX option"],
+["FLEX","Cooper Barkate",13.62,"START","Close FLEX decision"]];
+const starters=new Set(lineup.map(x=>x[1]));
+document.getElementById("lineup").innerHTML=lineup.map(x=>`<tr><td>${x[0]}</td><td><span class="player">${x[1]}</span></td><td>${x[0]}</td><td><b>${x[2].toFixed(2)}</b></td><td><span class="badge start">${x[3]}</span></td><td class="why">${x[4]}</td></tr>`).join("");
+document.getElementById("bench").innerHTML=roster.filter(x=>!starters.has(x[0])).sort((a,b)=>b[2]-a[2]).map(x=>`<tr><td class="player">${x[0]}</td><td>${x[1]}</td><td>${x[2].toFixed(2)}</td><td><span class="badge bench">BENCH</span></td></tr>`).join("")+
+`<tr><td class="player">Dierre Hill Jr.</td><td>RB</td><td>13.76</td><td><span class="badge start">FLEX</span></td></tr>`;
+
+function renderRank(pos="ALL"){
+ const arr=roster.filter(x=>pos==="ALL"||x[1]===pos).sort((a,b)=>b[2]-a[2]);
+ document.getElementById("rankingsBody").innerHTML=arr.map((x,i)=>`<tr><td>${i+1}</td><td class="player">${x[0]}</td><td>${x[1]}</td><td>${x[2].toFixed(2)}</td><td>${starters.has(x[0])?'<span class="badge start">ROSTER</span>':'<span class="badge bench">BENCH</span>'}</td><td class="why">${x[2]>=18?"High weekly value":x[2]>=13?"Playable/FLEX range":"Depth candidate"}</td></tr>`).join("");
+}
+renderRank();
+document.querySelectorAll(".rankfilter").forEach(b=>b.onclick=()=>{document.querySelectorAll(".rankfilter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRank(b.dataset.pos)});
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");window.scrollTo(0,0)});
+</script>
 </body>
 </html>
