@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>College Fantasy Assistant V11</title>
+<title>College Fantasy Assistant V12</title>
 <style>
 :root{--bg:#f4f6fa;--card:#fff;--ink:#17202a;--muted:#697587;--line:#dfe5ed;--purple:#7046c9;--green:#16824d;--red:#b93636;--gold:#986500;--blue:#2e5db1}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
@@ -22,12 +22,12 @@ footer{max-width:1300px;margin:35px auto 50px;padding:0 18px;color:#8993a2;font-
 <body>
 <header><div class="head">
 <div class="brand"><div class="logo">CF</div><div><b>College Fantasy Assistant</b><span>Yahoo NCAA CFB · League #16538 · V11</span></div></div>
-<nav><button class="active" data-page="dashboard">Dashboard</button><button data-page="team">My Team</button><button data-page="waivers">Waivers</button><button data-page="rankings">Rankings</button><button data-page="matchup">Matchup</button></nav>
+<nav><button class="active" data-page="dashboard">Dashboard</button><button data-page="team">My Team</button><button data-page="waivers">Waivers</button><button data-page="rankings">Rankings</button><button data-page="matchup">Matchup</button><button data-page="sources">Sources</button></nav>
 </div></header>
 
 <main class="wrap">
 <section id="dashboard" class="page active">
-<div class="top"><div><h1>Week 1 Game Plan</h1><div class="muted">V11 decision engine · start/sit, matchup, floor/ceiling and confidence</div></div><span class="badge warn">Yahoo API: PENDING APPROVAL</span></div>
+<div class="top"><div><h1>Week 1 Game Plan</h1><div class="muted">V12 multi-source decision engine · start/sit, matchup, floor/ceiling and confidence</div></div><span class="badge warn">Yahoo API: PENDING APPROVAL</span></div>
 <div class="grid">
 <div class="metric"><div class="label">Optimized projection</div><b id="dashTotal">206.09</b></div>
 <div class="metric good"><div class="label">Opponent</div><b>193.18</b></div>
@@ -73,10 +73,10 @@ footer{max-width:1300px;margin:35px auto 50px;padding:0 18px;color:#8993a2;font-
 </section>
 
 <section id="rankings" class="page">
-<div class="top"><div><h1>Rankings & Projections</h1><div class="muted">V11 separates Yahoo baseline from independent football signal</div></div></div>
+<div class="top"><div><h1>Rankings & Projections</h1><div class="muted">V12 separates Yahoo baseline from independent football signal</div></div></div>
 <div class="card"><div class="controls"><button class="rank active" data-pos="ALL">All</button><button class="rank" data-pos="QB">QB</button><button class="rank" data-pos="RB">RB</button><button class="rank" data-pos="WR">WR</button><button class="rank" data-pos="TE">TE</button><button class="rank" data-pos="DEF">DEF</button></div>
 <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Yahoo Proj</th><th>Independent signal</th><th>V11 action</th><th>Confidence</th></tr></thead><tbody id="rankings"></tbody></table>
-<div class="note">V11 does not fabricate independent numbers. Current independent-source signal is shown only where verified source data is available; live connectors are the next integration step.</div></div>
+<div class="note">V12 does not fabricate independent numbers. Current independent-source signal is shown only where verified source data is available; live connectors are the next integration step.</div></div>
 </section>
 
 <section id="matchup" class="page">
@@ -91,8 +91,49 @@ footer{max-width:1300px;margin:35px auto 50px;padding:0 18px;color:#8993a2;font-
 </tbody></table></div>
 <div class="two"><div class="card"><h2>🔥 Attack the matchup</h2><p>Your biggest modeled advantage is at <b>TE</b>, followed by WR and RB. Don't overreact to the tiny DEF/FLEX deficit.</p></div><div class="card"><h2>🎯 What could swing it</h2><p>The two FLEX spots are the clearest opportunity. A waiver pickup or late news change can materially alter the weekly projection.</p></div></div>
 </section>
+
+<section id="sources" class="page">
+<div class="top"><div><h1>Sources & Consensus</h1><div class="muted">V12 separates league data from independent football research.</div></div><span class="badge good">MULTI-SOURCE</span></div>
+
+<div class="card">
+<h2>How V12 works</h2>
+<div class="three">
+<div class="metric"><div class="label">Yahoo</div><b>League truth</b><span class="muted">Roster, eligibility, scoring, matchup and player pool.</span></div>
+<div class="metric"><div class="label">Independent</div><b>Football signal</b><span class="muted">Rankings, projections, role, depth chart and news.</span></div>
+<div class="metric"><div class="label">V12</div><b>Decision</b><span class="muted">Combines the signals into a personalized start/sit or waiver call.</span></div>
+</div>
+<div class="note">The app does not average unrelated numbers blindly. A source can be a ranking source, a projection source, or a news/role source. V12 keeps those signals separate and shows you what is actually verified.</div>
+</div>
+
+<div class="card">
+<h2>Your roster — independent signal check</h2>
+<table><thead><tr><th>Player</th><th>Pos</th><th>Yahoo baseline</th><th>Independent signal</th><th>V12 read</th></tr></thead>
+<tbody id="sourceTable"></tbody></table>
+</div>
+
+<div class="card">
+<h2>Sources currently wired into the research layer</h2>
+<table><thead><tr><th>Source</th><th>Use</th><th>What V12 takes from it</th></tr></thead><tbody>
+<tr><td class="player">College Football News</td><td><span class="badge good">RANKINGS</span></td><td>2026 Top 200 and position rankings.</td></tr>
+<tr><td class="player">Pro Football Network</td><td><span class="badge good">VALUE</span></td><td>Value-based CFF rankings and team offense/defense boards.</td></tr>
+<tr><td class="player">FantraxHQ</td><td><span class="badge good">RANKINGS</span></td><td>Independent 2026 CFF ranking board.</td></tr>
+<tr><td class="player">RotoWire</td><td><span class="badge good">PROJECTIONS/NEWS</span></td><td>Player projections, position analysis and current news/depth-chart signals.</td></tr>
+<tr><td class="player">Yahoo Sports</td><td><span class="badge blue">LEAGUE</span></td><td>League/player data and Yahoo's own projected ranks as a baseline — not the final decision.</td></tr>
+<tr><td class="player">Official team sites</td><td><span class="badge good">ROLE/NEWS</span></td><td>Starter status, roster changes, preseason notes and player production context.</td></tr>
+</tbody></table>
+<div class="note">V12 treats current depth-chart/news information as a separate signal from fantasy rankings. That matters in college football because roles can change very quickly.</div>
+</div>
+
+<div class="card">
+<h2>What this means for your Week 1 roster</h2>
+<div class="alert goodbox"><b>DeSean Bishop: strong cross-source confirmation.</b><br><span class="muted">CFN ranks him No. 7 overall and PFN also has him No. 7 on its value-based CFF board. Yahoo draft data has him as a high-ranked player as well.</span></div>
+<div class="alert goodbox"><b>Nate Sheppard: stronger than Yahoo projection alone suggests.</b><br><span class="muted">Yahoo draft data shows a 2026 rank of 9, while Duke lists him as a returning starter and notes PFF's No. 7 returning-RB ranking.</span></div>
+<div class="alert"><b>Dylan Wade: role signal matters.</b><br><span class="muted">UCF lists him as a 2026 senior TE and Mackey Award watch-list player after a 43/523/5 2025 season. That is useful context even when a raw fantasy rank is modest.</span></div>
+<div class="alert"><b>Reed Harris / Ian Strong / Dierre Hill Jr.: use roster replacement value.</b><br><span class="muted">Yahoo draft data currently places them at ranks 75, 78 and 34 respectively in examples indexed from active CFF drafts. V12 will use those as baseline signals, not automatic start/sit answers.</span></div>
+</div>
+</section>
 </main>
-<footer>College Fantasy Assistant V11 · Yahoo league data is currently a supplied snapshot. Independent college-fantasy research is used only when verified; live Yahoo integration will replace the snapshot after API approval.</footer>
+<footer>College Fantasy Assistant V12 · Multi-source research layer with Yahoo league data currently supplied as a snapshot. Independent college-fantasy research is used only when verified; live Yahoo integration will replace the snapshot after API approval.</footer>
 
 <script>
 const roster=[
@@ -120,6 +161,30 @@ const why={
 };
 function floor(p){return +(p.proj*.82).toFixed(2)}
 function ceil(p){return +(p.proj*1.20).toFixed(2)}
+
+const sourceSignals = {
+"Devon Dampier": {yahoo:11, independent:"CFN #11 overall; Fantrax #5 QB/overall board", strength:"STRONG"},
+"DeSean Bishop": {yahoo:null, independent:"CFN #7 overall; PFN #7 overall", strength:"VERY STRONG"},
+"Nate Sheppard": {yahoo:9, independent:"PFF: #7 returning RB; returning starter", strength:"VERY STRONG"},
+"Cam Coleman": {yahoo:22, independent:"CFN #14 overall", strength:"STRONG"},
+"Cooper Barkate": {yahoo:52, independent:"Yahoo indexed CFF rank #52; Miami transfer/role context", strength:"MODERATE"},
+"Ian Strong": {yahoo:78, independent:"Yahoo indexed CFF rank #78", strength:"MODERATE"},
+"Dylan Wade": {yahoo:95, independent:"UCF starter/production context; Mackey Award watch list", strength:"STRONG ROLE"},
+"Reed Harris": {yahoo:75, independent:"Yahoo indexed CFF rank #75", strength:"MODERATE"},
+"Dierre Hill Jr.": {yahoo:34, independent:"Yahoo indexed CFF rank #34", strength:"STRONG"},
+"Jadan Baugh": {yahoo:6, independent:"CFN #8 overall; PFN #6 overall", strength:"VERY STRONG"},
+"Mark Fletcher Jr.": {yahoo:23, independent:"CFN #23 overall", strength:"STRONG"},
+"Trinidad Chambliss": {yahoo:22, independent:"CFN #22 overall", strength:"STRONG"},
+"KJ Duff": {yahoo:null, independent:"Current Rutgers role/production context", strength:"MODERATE"}
+};
+function renderSources(){
+ document.getElementById("sourceTable").innerHTML = roster.map(p=>{
+   const s=sourceSignals[p.name];
+   if(!s) return `<tr><td class="player">${p.name}</td><td>${p.pos}</td><td>${p.proj.toFixed(2)} proj</td><td class="muted">No verified signal yet</td><td><span class="badge warn">WAIT</span></td></tr>`;
+   return `<tr><td class="player">${p.name}</td><td>${p.pos}</td><td>${p.proj.toFixed(2)} proj${s.yahoo?` · Yahoo rank ${s.yahoo}`:""}</td><td>${s.independent}</td><td><span class="badge ${s.strength.includes("VERY")?"good":s.strength.includes("STRONG")?"good":"warn"}">${s.strength}</span></td></tr>`;
+ }).join("");
+}
+
 function render(){
  let total=starters.reduce((s,n)=>s+P[n].proj,0);
  document.getElementById("dashTotal").textContent=total.toFixed(2);document.getElementById("score").textContent=total.toFixed(2);
@@ -145,5 +210,6 @@ function renderRank(pos){
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");scrollTo(0,0)});
 document.querySelectorAll(".rank").forEach(b=>b.onclick=()=>{document.querySelectorAll(".rank").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRank(b.dataset.pos)});
 render();
+renderSources();
 </script>
 </body></html>
